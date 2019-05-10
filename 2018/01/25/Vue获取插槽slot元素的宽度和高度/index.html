@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Vue获取插槽slot元素的宽度和高度 | 前端随笔</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="碰到问题后尝试的解决方案当我们在写Vue组件的时候，组件内有不确定模块，通常会放置插槽slot来完成，但是组件内还需要获取插槽的宽度和高度来完成该组件的功能，那么本人就在这个获取宽度和高度的时候折腾了一点时间。我一开始尝试的办法有两种，最后均以失败告终。  尝试方法一：将插槽外面包一个div，然后给该div赋值refs属性，通过this.$refs.element.offsetHeight和thi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue获取插槽slot元素的宽度和高度">
+<meta property="og:url" content="http://yoursite.com/2018/01/25/Vue获取插槽slot元素的宽度和高度/index.html">
+<meta property="og:site_name" content="前端随笔">
+<meta property="og:description" content="碰到问题后尝试的解决方案当我们在写Vue组件的时候，组件内有不确定模块，通常会放置插槽slot来完成，但是组件内还需要获取插槽的宽度和高度来完成该组件的功能，那么本人就在这个获取宽度和高度的时候折腾了一点时间。我一开始尝试的办法有两种，最后均以失败告终。  尝试方法一：将插槽外面包一个div，然后给该div赋值refs属性，通过this.$refs.element.offsetHeight和thi">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-10T02:10:24.918Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue获取插槽slot元素的宽度和高度">
+<meta name="twitter:description" content="碰到问题后尝试的解决方案当我们在写Vue组件的时候，组件内有不确定模块，通常会放置插槽slot来完成，但是组件内还需要获取插槽的宽度和高度来完成该组件的功能，那么本人就在这个获取宽度和高度的时候折腾了一点时间。我一开始尝试的办法有两种，最后均以失败告终。  尝试方法一：将插槽外面包一个div，然后给该div赋值refs属性，通过this.$refs.element.offsetHeight和thi">
+  
+    <link rel="alternate" href="/atom.xml" title="前端随笔" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">前端随笔</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Vue获取插槽slot元素的宽度和高度" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/25/Vue获取插槽slot元素的宽度和高度/" class="article-date">
+  <time datetime="2018-01-25T07:11:19.000Z" itemprop="datePublished">2018-01-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vue获取插槽slot元素的宽度和高度
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="碰到问题后尝试的解决方案"><a href="#碰到问题后尝试的解决方案" class="headerlink" title="碰到问题后尝试的解决方案"></a>碰到问题后尝试的解决方案</h4><p>当我们在写Vue组件的时候，组件内有不确定模块，通常会放置插槽slot来完成，但是组件内还需要获取插槽的宽度和高度来完成该组件的功能，那么本人就在这个获取宽度和高度的时候折腾了一点时间。我一开始尝试的办法有两种，最后均以失败告终。</p>
+<ol>
+<li>尝试方法一：<br>将插槽外面包一个div，然后给该div赋值refs属性，通过this.$refs.element.offsetHeight和this.$refs.element.offsetWidth来获取。</li>
+</ol>
+<ul>
+<li>模板部分</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;div refs=&quot;element&quot;&gt;</span><br><span class="line">    &lt;slot name=&quot;slideoper&quot;&gt;&lt;/slot&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>js部分</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mounted () &#123;</span><br><span class="line">    let left = this;</span><br><span class="line">    left.$nextTick(() =&gt; &#123;</span><br><span class="line">         left.buttonWidth = self.$refs.element.offsetWidth;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>尝试方法二：<br>将插槽外面包一个div，然后给div赋值id，通过this.$el.querySelector(‘#element).offsetWidth</li>
+</ol>
+<ul>
+<li>模板部分</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;div id=&quot;element&quot;&gt;</span><br><span class="line">    &lt;slot name=&quot;slideoper&quot;&gt;&lt;/slot&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>js部分</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mounted () &#123;</span><br><span class="line">    let left = this;</span><br><span class="line">    left.$nextTick(() =&gt; &#123;</span><br><span class="line">         left.buttonWidth = self.$el.querySelector(&apos;#element&apos;).offsetWidth</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="以上两种方式并没有解决问题，后来在钩子中mounted打印了一下this，发现它有元素-slots就可以获取到卡槽的所有内容，以下附上最终的解决方案。"><a href="#以上两种方式并没有解决问题，后来在钩子中mounted打印了一下this，发现它有元素-slots就可以获取到卡槽的所有内容，以下附上最终的解决方案。" class="headerlink" title="以上两种方式并没有解决问题，后来在钩子中mounted打印了一下this，发现它有元素$slots就可以获取到卡槽的所有内容，以下附上最终的解决方案。"></a>以上两种方式并没有解决问题，后来在钩子中mounted打印了一下this，发现它有元素$slots就可以获取到卡槽的所有内容，以下附上最终的解决方案。</h4><ul>
+<li>模板部分</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;slot name=&quot;slideoper&quot;&gt;&lt;/slot&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>js部分<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mounted () &#123;</span><br><span class="line">    let left = this;</span><br><span class="line">    left.$nextTick(() =&gt; &#123;</span><br><span class="line">        for(var slot of left.$slots.slideoper) &#123;</span><br><span class="line">            left.buttonWidth = left.buttonWidth + slot.elm.offsetWidth;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="感受：只有在不断的实践和填坑中才能get到更多！"><a href="#感受：只有在不断的实践和填坑中才能get到更多！" class="headerlink" title="感受：只有在不断的实践和填坑中才能get到更多！"></a>感受：只有在不断的实践和填坑中才能get到更多！</h4>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/25/Vue获取插槽slot元素的宽度和高度/" data-id="cjvhf5pko00055svkvooos3az" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/09/react项目中引入了redux后js控制路由跳转方案/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          react项目中引入了redux后js控制路由跳转方案
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/17/react中input的defaultValue和value属性/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">react中input的defaultValue和value属性</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/05/10/用hexo搭建自己的博客并免费发布至github空间/">用hexo搭建自己的博客并免费发布至github空间</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/28/git相关操作命令/">git相关操作命令</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/18/mac中报此错误的根本原因/">mac中报env: node: No such file or directory此错误的根本原因</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/08/前后端协同开发利器-SMock/">前后端协同开发利器-SMock</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/28/CSS手动书写兼容性样式自动消失/">CSS手动书写兼容性样式自动消失了</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 shelly<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
