@@ -1,0 +1,81 @@
+---
+title:  "Vue获取插槽slot元素的宽度和高度"
+date:   2018-01-25 15:11:19 +0800
+author: "廖艳丽"
+---
+#### 碰到问题后尝试的解决方案
+当我们在写Vue组件的时候，组件内有不确定模块，通常会放置插槽slot来完成，但是组件内还需要获取插槽的宽度和高度来完成该组件的功能，那么本人就在这个获取宽度和高度的时候折腾了一点时间。我一开始尝试的办法有两种，最后均以失败告终。
+
+1. 尝试方法一：
+将插槽外面包一个div，然后给该div赋值refs属性，通过this.$refs.element.offsetHeight和this.$refs.element.offsetWidth来获取。
+
+- 模板部分
+
+```
+
+<div refs="element">
+    <slot name="slideoper"></slot>
+</div>
+
+```
+
+- js部分
+
+```
+
+mounted () {
+    let left = this;
+    left.$nextTick(() => {
+         left.buttonWidth = self.$refs.element.offsetWidth;
+    })
+}
+
+```
+
+2. 尝试方法二：
+将插槽外面包一个div，然后给div赋值id，通过this.$el.querySelector('#element).offsetWidth
+
+- 模板部分
+
+```
+
+<div id="element">
+    <slot name="slideoper"></slot>
+</div>
+
+```
+
+- js部分
+
+```
+
+mounted () {
+    let left = this;
+    left.$nextTick(() => {
+         left.buttonWidth = self.$el.querySelector('#element').offsetWidth
+    })
+}
+```
+
+#### 以上两种方式并没有解决问题，后来在钩子中mounted打印了一下this，发现它有元素$slots就可以获取到卡槽的所有内容，以下附上最终的解决方案。
+
+- 模板部分
+
+```
+<slot name="slideoper"></slot>
+```
+
+- js部分
+```
+mounted () {
+    let left = this;
+    left.$nextTick(() => {
+        for(var slot of left.$slots.slideoper) {
+            left.buttonWidth = left.buttonWidth + slot.elm.offsetWidth;
+        }
+    })
+}
+```
+
+#### 感受：只有在不断的实践和填坑中才能get到更多！
+
