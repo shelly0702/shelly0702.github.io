@@ -80,4 +80,4 @@ theme: landscape
 deploy:
   type: git
   repo: https://github.com/shelly0702/shelly0702.github.io.git
-  branch: pages
+  branch: master
