@@ -62,6 +62,95 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-react中的e和event" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/04/react中的e和event/" class="article-date">
+  <time datetime="2018-05-04T02:09:00.000Z" itemprop="datePublished">2018-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/04/react中的e和event/">react中的e和event</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="react中获取元素事件触发的DOM对象，我们可以通过e-target和event-target来获取，但是用的时候需要注意一下"><a href="#react中获取元素事件触发的DOM对象，我们可以通过e-target和event-target来获取，但是用的时候需要注意一下" class="headerlink" title="react中获取元素事件触发的DOM对象，我们可以通过e.target和event.target来获取，但是用的时候需要注意一下"></a>react中获取元素事件触发的DOM对象，我们可以通过e.target和event.target来获取，但是用的时候需要注意一下</h4><ol>
+<li>在调用的事件方法中不需要传参，但是在方法声明的时候需要放入event，并放在最后一个参数的位置，示例</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">handleChange(item,event) &#123;</span><br><span class="line">    this.setState(&#123;value: event.target.value&#125;);</span><br><span class="line">&#125;</span><br><span class="line">&lt;input type=&quot;text&quot; value=&#123;this.state.value&#125; onChange=&#123;this.handleChange.bind(this,item)&#125; /&gt;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>而e和event是一样的，只是e是event的简写<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">handleChange(item,e) &#123;</span><br><span class="line">    this.setState(&#123;value: e.target.value&#125;);</span><br><span class="line">&#125;</span><br><span class="line">&lt;input type=&quot;text&quot; value=&#123;this.state.value&#125; onChange=&#123;this.handleChange.bind(this,item)&#125; /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/04/react中的e和event/" data-id="ck1vtrip70005twvkdhjqfldq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-再谈iphonex适配问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/03/再谈iphonex适配问题/" class="article-date">
+  <time datetime="2018-05-03T07:28:00.000Z" itemprop="datePublished">2018-05-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/03/再谈iphonex适配问题/">再谈iphonex适配问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>写在前面：近日处理线上项目里iphonex的适配问题，本以为自己之前处理过相应的问题，那本次处理也会得心应手，速度杠杠的改完。结果并不是，不得不说iphonex的适配问题真心让前端处理起来就像处理ie6一样难受。但是经过多次的趟水，摸到门道，总结下来，就不会害怕下次的问题到来。</p>
+</blockquote>
+<h4 id="处理适配问题，按照以下几个注意点处理就行"><a href="#处理适配问题，按照以下几个注意点处理就行" class="headerlink" title="处理适配问题，按照以下几个注意点处理就行"></a>处理适配问题，按照以下几个注意点处理就行</h4><p>1.name为viewport的meta标签中的设置,content中设置viewport-fit=cover</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta content=&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover&quot; name=&quot;viewport&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<p>2.给body设置安全区域，请将env设置加上，貌似现在constant对最新版本的ios系统根本不生效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">    padding-top: constant(safe-area-inset-top);</span><br><span class="line">    padding-top: env(safe-area-inset-top);</span><br><span class="line">    padding-bottom: constant(safe-area-inset-bottom);</span><br><span class="line">    padding-bottom: env(safe-area-inset-bottom);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.如果在页面顶部有position为fixed或者absolute，请设置top为0的同时，要加上下面的样式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.header &#123;</span><br><span class="line">    top: 0;</span><br><span class="line">    top: constant(safe-area-inset-top);</span><br><span class="line">    top: env(safe-area-inset-top);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>4.如果在页面顶部有position为fixed或者absolute，但是你的top不为0，请不要用网络上所说的计算calm来写，因为要么就是不能生效，要么就是生效了，但是结果不是你想要的。用margin来处理你需要空出的安全距离，示例如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.header &#123;</span><br><span class="line">    top: .2rem;</span><br><span class="line">    margin-top: constant(safe-area-inset-top);</span><br><span class="line">    margin-top: env(safe-area-inset-top);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>5.其他地方的处理是一个道理</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/03/再谈iphonex适配问题/" data-id="ck1vtrips0009twvke02osplw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-react项目中引入了redux后js控制路由跳转方案" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/04/09/react项目中引入了redux后js控制路由跳转方案/" class="article-date">
@@ -103,7 +192,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/09/react项目中引入了redux后js控制路由跳转方案/" data-id="cjvlsl0pf0004wcvkaib0ztsz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/09/react项目中引入了redux后js控制路由跳转方案/" data-id="ck1vtripf0006twvkedo3cj5j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -170,7 +259,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/25/Vue获取插槽slot元素的宽度和高度/" data-id="cjvlsl0ov0000wcvkex7jfxix" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/25/Vue获取插槽slot元素的宽度和高度/" data-id="ck1vtrios0002twvknq8xk0rl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -222,7 +311,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/17/react中input的defaultValue和value属性/" data-id="cjvlsl0po0008wcvkgc6b0nmx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/17/react中input的defaultValue和value属性/" data-id="ck1vtrir4000etwvk607lbc3v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -291,7 +380,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/09/windows环境用jekyll搭建博客详细步骤/" data-id="cjvlsl0pk0006wcvkw5rpa0fw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/09/windows环境用jekyll搭建博客详细步骤/" data-id="ck1vtripn0008twvkwi0iei8d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -337,23 +426,23 @@
       <ul>
         
           <li>
+            <a href="/2019/05/14/乌米（umi）到底是什么？/">乌米（umi）到底是什么？</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/14/js基础知识罗列/">js基础知识罗列</a>
+          </li>
+        
+          <li>
             <a href="/2019/05/13/用hexo搭建自己的博客并免费发布至github空间/">用hexo搭建自己的博客并免费发布至github空间</a>
           </li>
         
           <li>
+            <a href="/2019/05/13/初次使用antdesignpro时对其理解/">初次使用antdesignpro时对其理解</a>
+          </li>
+        
+          <li>
             <a href="/2018/12/28/git相关操作命令/">git相关操作命令</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/18/mac中报此错误的根本原因/">mac中报env: node: No such file or directory此错误的根本原因</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/08/前后端协同开发利器-SMock/">前后端协同开发利器-SMock</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/28/CSS手动书写兼容性样式自动消失/">CSS手动书写兼容性样式自动消失了</a>
           </li>
         
       </ul>

@@ -5,19 +5,19 @@
   
 
   
-  <title>react中的e和event | 小丽的前端随笔</title>
+  <title>乌米（umi）到底是什么？ | 小丽的前端随笔</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="react中获取元素事件触发的DOM对象，我们可以通过e.target和event.target来获取，但是用的时候需要注意一下 在调用的事件方法中不需要传参，但是在方法声明的时候需要放入event，并放在最后一个参数的位置，示例  1234handleChange(item,event) &amp;#123;    this.setState(&amp;#123;value: event.target.valu">
+  <meta name="description" content="简单理解 感觉它就是一个将webpack和react-router封装到一起的结合体。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="react中的e和event">
-<meta property="og:url" content="http://yoursite.com/2018/05/04/react中的e和event/index.html">
+<meta property="og:title" content="乌米（umi）到底是什么？">
+<meta property="og:url" content="http://yoursite.com/2019/05/14/乌米（umi）到底是什么？/index.html">
 <meta property="og:site_name" content="小丽的前端随笔">
-<meta property="og:description" content="react中获取元素事件触发的DOM对象，我们可以通过e.target和event.target来获取，但是用的时候需要注意一下 在调用的事件方法中不需要传参，但是在方法声明的时候需要放入event，并放在最后一个参数的位置，示例  1234handleChange(item,event) &amp;#123;    this.setState(&amp;#123;value: event.target.valu">
+<meta property="og:description" content="简单理解 感觉它就是一个将webpack和react-router封装到一起的结合体。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-13T02:42:12.945Z">
+<meta property="og:updated_time" content="2019-05-14T06:40:12.315Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="react中的e和event">
-<meta name="twitter:description" content="react中获取元素事件触发的DOM对象，我们可以通过e.target和event.target来获取，但是用的时候需要注意一下 在调用的事件方法中不需要传参，但是在方法声明的时候需要放入event，并放在最后一个参数的位置，示例  1234handleChange(item,event) &amp;#123;    this.setState(&amp;#123;value: event.target.valu">
+<meta name="twitter:title" content="乌米（umi）到底是什么？">
+<meta name="twitter:description" content="简单理解 感觉它就是一个将webpack和react-router封装到一起的结合体。">
   
     <link rel="alternate" href="/atom.xml" title="小丽的前端随笔" type="application/atom+xml">
   
@@ -64,10 +64,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-react中的e和event" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-乌米（umi）到底是什么？" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/05/04/react中的e和event/" class="article-date">
-  <time datetime="2018-05-04T02:09:00.000Z" itemprop="datePublished">2018-05-04</time>
+    <a href="/2019/05/14/乌米（umi）到底是什么？/" class="article-date">
+  <time datetime="2019-05-14T06:38:22.000Z" itemprop="datePublished">2019-05-14</time>
 </a>
     
   </div>
@@ -78,7 +78,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      react中的e和event
+      乌米（umi）到底是什么？
     </h1>
   
 
@@ -86,19 +86,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="react中获取元素事件触发的DOM对象，我们可以通过e-target和event-target来获取，但是用的时候需要注意一下"><a href="#react中获取元素事件触发的DOM对象，我们可以通过e-target和event-target来获取，但是用的时候需要注意一下" class="headerlink" title="react中获取元素事件触发的DOM对象，我们可以通过e.target和event.target来获取，但是用的时候需要注意一下"></a>react中获取元素事件触发的DOM对象，我们可以通过e.target和event.target来获取，但是用的时候需要注意一下</h4><ol>
-<li>在调用的事件方法中不需要传参，但是在方法声明的时候需要放入event，并放在最后一个参数的位置，示例</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">handleChange(item,event) &#123;</span><br><span class="line">    this.setState(&#123;value: event.target.value&#125;);</span><br><span class="line">&#125;</span><br><span class="line">&lt;input type=&quot;text&quot; value=&#123;this.state.value&#125; onChange=&#123;this.handleChange.bind(this,item)&#125; /&gt;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>而e和event是一样的，只是e是event的简写<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">handleChange(item,e) &#123;</span><br><span class="line">    this.setState(&#123;value: e.target.value&#125;);</span><br><span class="line">&#125;</span><br><span class="line">&lt;input type=&quot;text&quot; value=&#123;this.state.value&#125; onChange=&#123;this.handleChange.bind(this,item)&#125; /&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+        <h3 id="简单理解"><a href="#简单理解" class="headerlink" title="简单理解"></a>简单理解</h3><ul>
+<li>感觉它就是一个将webpack和react-router封装到一起的结合体。</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/04/react中的e和event/" data-id="ck1vtrip70005twvkdhjqfldq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/05/14/乌米（umi）到底是什么？/" data-id="ck1vtripj0007twvki55fo059" class="article-share-link">Share</a>
       
       
     </footer>
@@ -107,19 +102,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/05/04/给props属性设置多种数据类型/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          给props属性设置多种数据类型
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/05/03/再谈iphonex适配问题/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/05/14/js基础知识罗列/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">再谈iphonex适配问题</div>
+      <div class="article-nav-title">js基础知识罗列</div>
     </a>
   
 </nav>
